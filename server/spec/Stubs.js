@@ -1,6 +1,6 @@
 // Methods for stubbing HTTP requests and responses
 module.exports = {
-
+  austin: 'disco',
   response: function() {
     this._ended = false;
     this._responseCode = null;

@@ -1,3 +1,6 @@
+//delete me 
+var stubs = require('./spec/Stubs');
+console.log('DANCE', stubs.austin);
 /*************************************************************
 
 You should implement your request handler function in this file.
@@ -27,18 +30,15 @@ var requestHandler = function(request, response) {
   // Adding more logging to your server can be an easy way to get passive
   // debugging help, but you should always be careful about leaving stray
   // console.logs in your code.
-  console.log('Serving request type ' + request.method + ' for url ' + request.url);
+  //console.log('Serving request type ' + request.method + ' for url ' + request.url);
   //console.log('DISCO:', request);
-  console.log('METHHH');
+  //console.log('METHHH');
   // The outgoing status.
   var statusCode = 200;
   
   if ( request.method === 'POST' ) {
     //store in array;
     
-  }
-  if ( request.method === 'GET' ) {
-
   }
 
   // These headers will allow Cross-Origin Resource Sharing (CORS).
