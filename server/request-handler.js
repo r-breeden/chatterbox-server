@@ -1,6 +1,6 @@
 //delete me 
-var stubs = require('./spec/Stubs');
-console.log('DANCE', stubs.austin);
+//var stubs = require('./spec/Stubs');
+
 /*************************************************************
 
 You should implement your request handler function in this file.
@@ -15,6 +15,7 @@ this file and include it in basic-server.js so that it actually works.
 
 **************************************************************/
 var results = [];
+//var objectId = 0;
 var requestHandler = function(request, response) {
   // Request and Response come from node's http module.
   //
@@ -30,17 +31,36 @@ var requestHandler = function(request, response) {
   // Adding more logging to your server can be an easy way to get passive
   // debugging help, but you should always be careful about leaving stray
   // console.logs in your code.
-  //console.log('Serving request type ' + request.method + ' for url ' + request.url);
-  //console.log('DISCO:', request);
-  //console.log('METHHH');
+  console.log('Serving request type ' + request.method + ' for url ' + request.url);
+ 
   // The outgoing status.
   var statusCode = 200;
+ 
+
+  if ( request.method === 'POST' && request.url === '/classes/messages') {
+    statusCode = 201;
   
-  if ( request.method === 'POST' ) {
-    //store in array;
+    request.on('data', function (message) {
+      //objectId++;
+      
+      message = JSON.parse(message);
+      //message.objectId = objectId;
+      //request._postData
+      console.log(message);
+      results.push(message);
+    }); 
+  } else if ( request.method === 'GET' && request.url === '/classes/messages') {
     
+  } else {
+    
+    statusCode = 404;
+
   }
 
+  console.log("************************");
+  console.log(results);
+  console.log("************************");
+  
   // These headers will allow Cross-Origin Resource Sharing (CORS).
   // This code allows this server to talk to websites that
   // are on different domains, for instance, your chat client.
@@ -64,7 +84,7 @@ var requestHandler = function(request, response) {
   //
   // You will need to change this if you are sending something
   // other than plain text, like JSON or HTML.
-  headers['Content-Type'] = 'text/html';
+  headers['Content-Type'] = 'application/json';
 
   // .writeHead() writes to the request line and headers of the response,
   // which includes the status and all headers.
@@ -78,7 +98,7 @@ var requestHandler = function(request, response) {
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
   //var json = JSON.stringify(request);
-  response.end(JSON.stringify({results}));
+  response.end(JSON.stringify({results: results}));
 };
 
 
