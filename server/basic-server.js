@@ -1,5 +1,7 @@
 // Import node's http module: */
 var http = require('http');
+var url = require('url');
+var work = require ('./utility');
 var requestHandler = require('./request-handler');
 
 
@@ -15,6 +17,14 @@ var port = 3000;
 // special address that always refers to localhost.
 var ip = '127.0.0.1';
 
+//if this equals '/classes/messages' g2g
+//if this equals anything else SEND IT TO THE GALLOWS 404
+/*var route = url.parse(req.url).pathname;
+
+if (route !== '/classes/messages') {
+  work.sendRequest('', '', 404);
+}
+*/
 
 // We use node's http module to create a server.
 //
@@ -22,7 +32,12 @@ var ip = '127.0.0.1';
 // incoming requests.
 //
 // After creating the server, we will tell it to listen on the given port and IP. */
-var server = http.createServer(requestHandler.requestHandler);
+var server = http.createServer(
+
+    requestHandler.requestHandler
+
+  
+);
 console.log('Listening on http://' + ip + ':' + port);
 server.listen(port, ip);
 
